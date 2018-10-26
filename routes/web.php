@@ -11,10 +11,21 @@
 |
 */
 
-Route::get('/', function () {
-    return view('index');
-});
-Route::resource('/category', 'CategoryController');
+Route::redirect('/', '/dashboard');
+
+
 Auth::routes();
+
+Route::group(['prefix' => 'dashboard', 'middleware' => 'auth'], function (){
+
+    Route::get('/', 'DashboardController@index')->name('dashboard.index');
+
+    Route::resource('/category', 'CategoryController')->except('show');
+
+    Route::resource('/profile', 'ProfileController')->except('show');
+
+    Route::resource('/product', 'ProductController');
+
+});
 
 Route::get('/home', 'HomeController@index')->name('home');

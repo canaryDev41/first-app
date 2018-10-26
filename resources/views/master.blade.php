@@ -49,16 +49,16 @@
                     <!-- Logo icon --><b>
                         <!--You can put here icon as well // <i class="wi wi-sunset"></i> //-->
                         <!-- Dark Logo icon -->
-                        <img src="../assets/images/logo-icon.png" alt="homepage" class="dark-logo" />
+                        <img src="{{ url('assets/images/logo-icon.png') }}" alt="homepage" class="dark-logo"/>
                         <!-- Light Logo icon -->
-                        <img src="../assets/images/logo-light-icon.png" alt="homepage" class="light-logo" />
+                        <img src=" {{ url('assets/images/logo-light-icon.png') }}" alt="homepage" class="light-logo" />
                     </b>
                     <!--End Logo icon -->
                     <!-- Logo text --><span>
                          <!-- dark Logo text -->
-                         <img src="../assets/images/logo-text.png" alt="homepage" class="dark-logo" />
+                         <img src=" {{ url('assets/images/logo-text.png') }}" alt="homepage" class="dark-logo" />
                         <!-- Light Logo text -->
-                         <img src="../assets/images/logo-light-text.png" class="light-logo" alt="homepage" /></span> </a>
+                         <img src="{{ url('assets/images/logo-light-text.png')  }}" class="light-logo" alt="homepage" /></span> </a>
             </div>
             <!-- ============================================================== -->
             <!-- End Logo -->
@@ -79,12 +79,33 @@
                         </form>
                     </li>
                 </ul>
-                <ul class="navbar-nav my-lg-0">
+                <ul class="navbar-nav my-lg-2">
                     <!-- ============================================================== -->
                     <!-- User profile and search -->
                     <!-- ============================================================== -->
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="../assets/images/users/1.jpg" alt="user" class="img-circle" width="30"></a>
+
+                        <div class="btn-group">
+
+                            <!-- Basic dropdown -->
+                            <button class="btn btn-primary dropdown-toggle col-lg-12" type="button" data-toggle="dropdown" aria-haspopup="true"
+                                    aria-expanded="false">{{ auth()->user()->email }}</button>
+
+                            <div class="dropdown-menu">
+                                <a class="dropdown-item" href="#">Profile</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="{{ route('logout') }}"
+                                   onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                                    {{ __('Logout') }}
+                                </a>
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                    @csrf
+                                </form>
+                            </div>
+                            <!-- Basic dropdown -->
+
+                        </div>
                     </li>
                     <!-- ============================================================== -->
                     <!-- User profile and search -->
@@ -101,7 +122,7 @@
     <!-- ============================================================== -->
     <aside class="left-sidebar">
         <div class="d-flex no-block nav-text-box align-items-center">
-            <span><img src="../assets/images/logo-icon.png" alt="elegant admin template"></span>
+            <span><img src="{{ url('assets/images/logo-icon.png') }}" alt="elegant admin template"></span>
             <a class="waves-effect waves-dark ml-auto hidden-sm-down" href="javascript:void(0)"><i class="ti-menu"></i></a>
             <a class="nav-toggler waves-effect waves-dark ml-auto hidden-sm-up" href="javascript:void(0)"><i class="ti-menu ti-close"></i></a>
         </div>
@@ -110,15 +131,16 @@
             <!-- Sidebar navigation-->
             <nav class="sidebar-nav">
                 <ul id="sidebarnav">
-                    <li> <a class="waves-effect waves-dark" href="index.blade.php" aria-expanded="false"><i class="fa fa-tachometer"></i><span class="hide-menu">Dashboard</span></a></li>
-                    <li> <a class="waves-effect waves-dark" href="pages-profile.blade.php" aria-expanded="false"><i class="fa fa-user-circle-o"></i><span class="hide-menu">Profile</span></a></li>
-                    <li> <a class="waves-effect waves-dark" href="table-basic.blade.php" aria-expanded="false"><i class="fa fa-table"></i><span class="hide-menu"></span>Tables</a></li>
-                    <li> <a class="waves-effect waves-dark" href="icon-fontawesome.blade.php" aria-expanded="false"><i class="fa fa-smile-o"></i><span class="hide-menu"></span>Icon</a></li>
-                    <li> <a class="waves-effect waves-dark" href="map-google.blade.php" aria-expanded="false"><i class="fa fa-globe"></i><span class="hide-menu"></span>Map</a></li>
-                    <li> <a class="waves-effect waves-dark" href="pages-blank.blade.php" aria-expanded="false"><i class="fa fa-bookmark-o"></i><span class="hide-menu"></span>Blank</a></li>
-                    <li> <a class="waves-effect waves-dark" href="pages-error-404.blade.php" aria-expanded="false"><i class="fa fa-question-circle"></i><span class="hide-menu"></span>404</a></li>
+                    <li> <a class="waves-effect waves-dark" href="{{ route('dashboard.index') }}" aria-expanded="false"><i class="fa fa-tachometer"></i><span class="hide-menu">Dashboard</span></a></li>
+                    <li> <a class="waves-effect waves-dark" href="{{ route('category.index') }}" aria-expanded="false"><i class="fa fa-tag"></i><span class="hide-menu">Categories</span></a></li>
+                    <li> <a class="waves-effect waves-dark" href="{{ route('product.index') }}" aria-expanded="false"><i class="fa fa-table"></i><span class="hide-menu"></span>Products</a></li>
+                    <li> <a class="waves-effect waves-dark" href="{{ route('dashboard.index') }}" aria-expanded="false"><i class="fa fa-smile-o"></i><span class="hide-menu"></span>Orders</a></li>
+                    <li> <a class="waves-effect waves-dark" href="{{ route('dashboard.index') }}" aria-expanded="false"><i class="fa fa-line-chart"></i><span class="hide-menu"></span>Sales</a></li>
+                    <li> <a class="waves-effect waves-dark" href="{{ route('dashboard.index') }}" aria-expanded="false"><i class="fa fa-truck"></i><span class="hide-menu"></span>Shipping</a></li>
+                    <li> <a class="waves-effect waves-dark" href="{{ route('dashboard.index') }}" aria-expanded="false"><i class="fa fa-pie-chart"></i><span class="hide-menu"></span>Reports</a></li>
+                    <li> <a class="waves-effect waves-dark" href="{{ route('dashboard.index') }}" aria-expanded="false"><i class="fa fa-user"></i><span class="hide-menu"></span>Users</a></li>
+
                     <div class="text-center m-t-30">
-                        <a href="https://wrappixel.com/templates/adminwrap/" class="btn waves-effect waves-light btn-success hidden-md-down"> Upgrade to Pro</a>
                     </div>
                 </ul>
             </nav>

@@ -38,22 +38,13 @@ class CategoryController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @return string
      */
     public function store(Request $request)
     {
-        //
-    }
+        Category::create($request->all());
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Category  $category
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Category $category)
-    {
-        //
+         return redirect()->route('category.index')->with('message', 'Category Added Successfully');
     }
 
     /**
@@ -64,7 +55,7 @@ class CategoryController extends Controller
      */
     public function edit(Category $category)
     {
-        //
+        return view('category.edit', compact('category'));
     }
 
     /**
@@ -76,7 +67,9 @@ class CategoryController extends Controller
      */
     public function update(Request $request, Category $category)
     {
-        //
+        Category::find($category->id)->update($request->all());
+
+        return redirect()->route('category.index')->with('message', 'Category Updated Successfully');
     }
 
     /**
@@ -87,6 +80,7 @@ class CategoryController extends Controller
      */
     public function destroy(Category $category)
     {
-        //
+        Category::destroy($category->id);
+        return redirect()->route('category.index')->with('message', 'Category Deleted Successfully');
     }
 }

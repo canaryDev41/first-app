@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Category;
 use App\Product;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
@@ -14,7 +16,13 @@ class ProductController extends Controller
      */
     public function index()
     {
-        //
+        try{
+            $products = Product::all();
+        }catch (ModelNotFoundException $e){
+            $products = [];
+        }
+
+        return view('product.index', compact('products'));
     }
 
     /**
@@ -24,7 +32,14 @@ class ProductController extends Controller
      */
     public function create()
     {
-        //
+        try{
+            $categories = Category::all();
+
+        }catch (ModelNotFoundException $e){
+            $categories = [];
+        }
+
+        return view('product.create', compact('categories'));
     }
 
     /**
@@ -35,7 +50,9 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Product::create($request->all());
+
+        return redirect()->route('product.index')->with('message', 'Product Added Successfully');
     }
 
     /**
@@ -57,7 +74,9 @@ class ProductController extends Controller
      */
     public function edit(Product $product)
     {
-        //
+        $categories = Category::all();
+
+        return view('product.edit', compact('product','categories'));
     }
 
     /**
@@ -69,7 +88,9 @@ class ProductController extends Controller
      */
     public function update(Request $request, Product $product)
     {
-        //
+        Product::find($product->id)->update($request->all());
+
+        return redirect()->route('product.index')->with('message', 'Product Updated Successfully');
     }
 
     /**
@@ -80,6 +101,7 @@ class ProductController extends Controller
      */
     public function destroy(Product $product)
     {
-        //
+        Product::destroy($product->id);
+        return redirect()->route('product.index')->with('message', 'Product Deleted Successfully');
     }
 }

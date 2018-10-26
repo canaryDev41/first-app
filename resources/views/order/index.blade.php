@@ -6,17 +6,17 @@
     <!-- ============================================================== -->
     <div class="row page-titles">
         <div class="col-md-5 align-self-center">
-            <h4 class="text-themecolor">Categories</h4>
+            <h4 class="text-themecolor">Poducts</h4>
         </div>
         <div class="col-md-7 align-self-center text-right">
             <div class="d-flex justify-content-end align-items-center">
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="javascript:void(0)">Home</a></li>
-                    <li class="breadcrumb-item active">Categories</li>
+                    <li class="breadcrumb-item active">Products</li>
                 </ol>
             </div>
             <div class="col-md-3 align-self-cente">
-                <a href="{{ route('category.create') }}" class="btn btn-success">New Category</a>
+                <a href="{{ route('product.create') }}" class="btn btn-success">New Poducts</a>
             </div>
         </div>
     </div>
@@ -29,13 +29,11 @@
     <div class="row">
         <!-- column -->
         <div class="col-12">
-
             @if(session('message'))
                 <div class="alert alert-success">
                     {{ session('message') }}
                 </div>
             @endif
-
             <div class="card">
                 <div class="card-body">
                     <h4 class="card-title">Categories table</h4>
@@ -44,29 +42,23 @@
                             <thead>
                             <tr>
                                 <th width="10%">#</th>
-                                <th width="60%">Name</th>
-                                <th width="10%">Products Count</th>
+                                <th width="40%">Name</th>
+                                <th width="10%">Category #</th>
+                                <th width="10%">Price</th>
                                 <th width="20%">Control</th>
                             </tr>
                             </thead>
                             <tbody>
-                            @foreach($categories as $category)
+                            @foreach($products as $product)
                                 <tr>
-                                    <td>{{ $category->id }}</td>
-                                    <td>{{ $category->name }}</td>
-                                    <td> {{ $category->products->count() }}</td>
-                                    <td class="form-inline">
-                                        <form action="{{ route('category.destroy' ,$category) }}" method="post">
-                                            {{ csrf_field() }}
-                                            {{ method_field('delete') }}
-                                            <button type="submit" class="btn btn-danger"><i class="fa fa-trash">
-                                                    delete </i>
-                                            </button>
-                                        </form>
-                                        &nbsp; &nbsp;
-                                        <a href="{{ route('category.edit', $category) }}" class="btn btn-success"><i
-                                                    class="fa fa-edit"> update </i>
-                                        </a>
+                                    <td>{{ $product->id }}</td>
+                                    <td>{{ $product->name }}</td>
+                                    <td>{{ $product->category_id }}</td>
+                                    <td>{{ $product->price }}</td>
+
+                                    <td>
+                                        <a href="" class="btn btn-danger"><i class="fa fa-trash"> delete </i></a>
+                                        <a href="" class="btn btn-success"><i class="fa fa-edit"> update </i></a>
                                     </td>
                                 </tr>
                             @endforeach

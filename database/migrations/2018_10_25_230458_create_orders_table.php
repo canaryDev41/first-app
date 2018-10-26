@@ -18,6 +18,7 @@ class CreateOrdersTable extends Migration
             $table->string('user_id');
             $table->integer('quantity');
             $table->float('total');
+            $table->integer('orderdeails_id');
             $table->timestamps();
         });
     }
